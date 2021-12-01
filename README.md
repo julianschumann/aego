@@ -3,17 +3,17 @@ In this repository, the code and data used to generate the results from the pape
 
 # Figure 2
 [Figure 2](https://github.com/julianschumann/ae-opt/blob/main/Figure_2.pdf) shows the results of optimizing the benchmark functions. When reproducing the results fro c2, c3 and c4, it should be enough to just run the repsective python files:
-'''
+```
 python benchmark_test_c2.py 
 python benchmark_test_c3.py 
 python benchmark_test_c4.py 
-'''
+```
 
 But due to the larger computational demands to optimize c1, 50 processors were used for this step:
-'''
+```
 mpirun -n 50 python benchmark_test_c1.py
 python results_benchmark_test_c1.py
-'''
+```
 
 # Figure 3
 [Figure 3](https://github.com/julianschumann/ae-opt/blob/main/Figure_3.pdf)\\
