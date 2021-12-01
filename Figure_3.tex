@@ -72,11 +72,11 @@
             colormap/viridis,  
             point meta min= 0,   
             point meta max=  315,
-            ] table[x=a, y=b, z=c] from {Figure_11/2d_projection.txt};
+            ] table[x=a, y=b, z=c] from {Compliance_minimization/Figure_3/2d_projection.txt};
 	\addplot3 [very thin, black, opacity=0.5,
-            ] table[x=a, y=b, z=c] from {Figure_11/2d_mesh.txt};
+            ] table[x=a, y=b, z=c] from {Compliance_minimization/Figure_3/2d_mesh.txt};
 	\addplot3 [thin, black,
-            ] table[x=a, y=b, z=c] from {Figure_11/2d_mesh_2.txt};
+            ] table[x=a, y=b, z=c] from {Compliance_minimization/Figure_3/2d_mesh_2.txt};
               
 	\end{axis}
 	\node at (1.15,0.65) {$a$};
@@ -90,7 +90,7 @@
 	\node[black,thin,left] at (1,5.7) {\textbf{A}};
              \begin{scope}[scale=0.6,xshift=13.33cm, yshift=7.5cm]
                  \node[] at (2.5,1.25)
-                     {\includegraphics[width=3cm]{Figure_11/vis_1_X1.png}};
+                     {\includegraphics[width=3cm]{Compliance_minimization/Figure_3/vis_1_X1.png}};
 	\draw[step=0.0555555cm,black!50!white, very thin,shift={(0,0)}] (0,0)  grid(5,2.5);
                  \draw[black,thin] (0,0) rectangle(5,2.5);% Bearings
                  \draw[black,thin] (4.75,-0.25) -- (5,0) -- (5.25,-0.25)--  cycle;
@@ -144,14 +144,14 @@
              \end{scope} 
              \begin{scope}[scale=0.6,xshift=13.33cm, yshift=4.16666cm]
                  \node[] at (2.5,1.25)
-                     {\includegraphics[width=3cm]{Figure_11/vis_1_dX1.png}};
+                     {\includegraphics[width=3cm]{Compliance_minimization/Figure_3/vis_1_dX1.png}};
 	\draw[step=0.0555555cm,black!50!white, very thin,shift={(0,0)}] (0,0)  grid(5,2.5);
                  \draw[black,thin] (0,0) rectangle(5,2.5);% Bearings
                  \node[black,thin,right] at (5,2) {\textbf{C}};
              \end{scope}
              \begin{scope}[scale=0.6,xshift=13.33cm, yshift=0.83333cm]
                  \node[] at (2.5,1.25)
-                     {\includegraphics[width=3cm]{Figure_11/vis_1_dX2.png}};
+                     {\includegraphics[width=3cm]{Compliance_minimization/Figure_3/vis_1_dX2.png}};
 	\draw[step=0.0555555cm,black!50!white, very thin,shift={(0,0)}] (0,0)  grid(5,2.5);
                  \draw[black,thin] (0,0) rectangle(5,2.5);% Bearings
                  \node[black,thin,right] at (5,2) {\textbf{D}};
