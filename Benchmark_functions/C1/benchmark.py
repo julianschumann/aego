@@ -10,14 +10,23 @@ import time
 
 
 def mapping(dim,edim):
-    n=5000
-    Z0=np.random.rand(n,edim)*2-1
-    Z0[0,:]=0.5
-    W1=(np.random.rand(edim,dim)-0.5)*0.4
-    X1=np.tanh(np.dot(Z0,W1))
-    N=np.log(0.5*X1[[0],:]+0.5)/np.log(0.625)
-    X2=2*((X1+1)/2)**(1/N)-1
-    return X2
+    n=int(2.5*dim)
+    Z0=np.random.rand(n,edim)
+    B1=np.tile(np.random.rand(1,dim),(n,1))-0.5
+    B2=np.tile(np.random.rand(1,dim),(n,1))-0.5
+    B3=np.tile(np.random.rand(1,dim),(n,1))-0.5
+    W1=(np.random.rand(edim,dim)*0.05+0.05)*np.sign(np.random.rand(edim,dim)-0.5)
+    W2=(np.random.rand(dim,dim)*0.05+0.05)*np.sign(np.random.rand(dim,dim)-0.5)
+    W3=(np.random.rand(dim,dim)*0.05+0.05)*np.sign(np.random.rand(dim,dim)-0.5)
+    X1=np.tanh(B1+np.dot(Z0,W1))
+    X2=B2+np.dot(X1,W2)
+    X2=np.exp(-X2**2)
+    X3=2/(1-np.min(X2,0)[np.newaxis,:])*(X2-np.min(X2,0)[np.newaxis,:])-1
+    X4=B3+np.dot(X3,W3)
+    X5=X4-X4[0,:]
+    X5=np.tanh(X5)*0.325
+    X6=(X5**2-1)*(0.75*X5-0.25)+2/np.pi*np.arcsin(X5)
+    return X6
 
 def cost_opt(X,opt_it,X0):
     M=np.zeros(X.shape)
@@ -63,26 +72,23 @@ def cost_dec(Z,decoder,opt_it,X0):
     return cost(X,X0)
 
 def cost(X,X0):
-    C0=np.zeros(len(X))
+    C=np.zeros(len(X))
     for i in range(len(X)):
-        C0[i]=np.min(np.sum((X0[1:,:]-X[[i],:])**2,1))
-    Xn=np.sum((X-0.25)**2,1)
-    Cn=(1-np.exp(-5*Xn))*(0.2+np.exp(-5*Xn))*5
-    return (C0+1)*Cn
+        C[i]=np.min(np.sum((X0-X[[i],:])**2,1))
+    Cn=np.sum((X-0.25)**2,1)
+    Cn=(1-np.exp(-10*Cn))*(0.4+np.exp(-10*Cn))*3
+    return C+Cn
 
 def gradient(X,X0):
-    Xn=np.sum((X-0.25)**2,1)
-    Cn=(1-np.exp(-5*Xn))*(0.2+np.exp(-5*Xn))*5
-    dXndX=2*(X-0.25)
-    dCndXn=50*np.exp(-10*Xn)-20*np.exp(-5*Xn)
-    Gn=dCndXn[:,np.newaxis]*dXndX
+    ECn=np.exp(-10*np.sum((X-0.25)**2,1))
+    dCndX=2*(X-0.25)
+    dCndCn=3*(20*ECn**2-6*ECn)
+    Gn=dCndCn[:,np.newaxis]*dCndX
     G0=np.zeros(X.shape)
-    C0=np.zeros(len(X))
     for i in range(len(X)):
-        jmin=np.argmin(np.sum((X0[1:,:]-X[[i],:])**2,1))
-        G0[i,:]=2*(X[i,:]-X0[jmin+1,:])
-        C0[i]=np.sum((X0[jmin+1,:]-X[i,:])**2)
-    G=Cn[:,np.newaxis]*G0+(C0[:,np.newaxis]+1)*Gn
+        jmin=np.argmin(np.sum((X0-X[[i],:])**2,1))
+        G0[i,:]=2*(X[i,:]-X0[jmin,:])
+    G=G0+Gn 
     return G
 
 def train_autoencoder(AE,X_rank,rank,size,perrank,n_epochs):   
@@ -152,25 +158,20 @@ comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
 
-np.random.seed(rank)
-
-dim=500
+dim=1000
 Edim=[10,5]
 
-# ensure other local minima not to close to global optimum
 if rank==0:
-    X0=mapping(dim,10)    
-    Dmin=np.sqrt(np.min(np.sum((X0[1:,:]-0.25)**2,1)))
-    while Dmin<1:        
-        X0=mapping(dim,10)    
-        Dmin=np.sqrt(np.min(np.sum((X0[1:,:]-0.25)**2,1)))
+    D=1
+    while D<4:
+        X0=mapping(1000,10)    
+        D=np.sqrt(np.sum((np.mean(X0,0)-0.25)**2))
     np.save('Results/Local_minima.npy',X0)
 else:
     X0=None
 
 comm.Barrier()
 X0=comm.bcast(X0,root=0)
-
 
 
 ######################################################################
@@ -410,8 +411,6 @@ C_de=np.zeros((num_pop,1001))
 C_de[:,0]=C
 loop=0
 while loop<1000:
-    if rank==0:
-        print('   Generation {}'.format(loop))
     X_rank=X[rank*num_pop_perrank:(rank+1)*num_pop_perrank,:]
     C_rank=C[rank*num_pop_perrank:(rank+1)*num_pop_perrank]
 
