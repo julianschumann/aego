@@ -67,4 +67,6 @@ The result show in the paper have been produced using the following software imp
   - Pillow: 8.4.0
 - Openmpi: 1.8.8
 
-All commands to reproduce the results have to be run in the directory where the respective python files are found
+All commands to reproduce the results have to be run in the directory where the respective python files are found.
+
+It also has to be noted that it on other operating systems, the command mpirun might have to be replaced with mpiexec.
