@@ -1,0 +1,276 @@
+\documentclass[class=scrreprt]{standalone}
+
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots}
+
+\KOMAoptions{fontsize=9pt}
+
+
+\begin{document}
+
+\begin{tikzpicture}[]
+         \begin{semilogyaxis}[
+		 at={(1cm,6cm)},
+	       	 width=5.00000001cm,
+		 height=4cm,
+	    	 scale only axis=true,
+                 axis lines = left,
+                 xmin=0,
+                 xmax=6e6,
+                 xtick={0,2e6,4e6,6e6},
+                 xticklabels={,,,},
+		 scaled x ticks = false,
+                 ymin=9e-6,
+                 ymax=1e3,
+                 ytick={9e-6,1e-3,1e-1,1e1,1e3},
+                 yticklabels={,,,,},
+		 minor ytick={0.0784e-3,0.2116e-3,0.4096e-3,0.6724e-3,0.0784e-1,0.2116e-1,0.4096e-1,0.6724e-1,0.0784e1,0.2116e1,0.4096e1,0.6724e1,0.0784e3,0.2116e3,0.4096e3,0.6724e3},
+   		 yminorgrids=false,
+                 xmajorgrids=true,
+		 ymajorgrids=true,
+                 legend style={fill=white, fill opacity=0, draw opacity=1, text opacity=1,draw=none},  
+                 legend pos=south west,
+                 legend cell align={left}
+             ]
+             \addplot[ 
+                 color=olive,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_rand.txt};
+             \addplot[ 
+                 color=olive,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_ae_de.txt};
+             \addplot[ 
+                 color=olive,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_post_de.txt};
+             \addplot[ 
+                 color=blue,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_rand.txt};
+             \addplot[ 
+                 color=blue,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_ae_red.txt};
+             \addplot[ 
+                 color=blue,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_post_red.txt};
+             \addplot[ 
+                 color=red,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_rand.txt};
+             \addplot[ 
+                 color=red,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_ae.txt};
+             \addplot[ 
+                 color=red,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_post.txt};
+             \legend{DE,,,$m=5$,,,$m=10$,,};
+         \end{semilogyaxis}
+
+         \node[black] at (0.25,9.75) {\textbf{A}};
+	 \node[black,right] at (0.9,5.75) {\noexpand\noexpand\noexpand\footnotesize{$0\cdot 10^{6}$}};
+	 \node[black,left] at (6.1,5.75) {\noexpand\noexpand\noexpand\footnotesize{$6\cdot 10^{6}$}};
+	 \node[black] at (3.5,5.5) {$n_F$};
+
+	 \node[black,right,rotate=90] at (0.75,5.9) {\noexpand\noexpand\noexpand\footnotesize{$10^{-5}$}};
+	 \node[black,left, rotate=90] at (0.75,10.1) {\noexpand\noexpand\noexpand\footnotesize{$10^{3}$}};
+	 \node[black, rotate=90] at (0.5,8) {$\min(c_1)$};
+
+        
+         \begin{semilogyaxis}[
+		 at={(7cm,1cm)},
+	       	 width=5cm,
+		 height=4cm,
+	    	 scale only axis=true,
+                 axis lines = left,
+                 xmin=0,
+                 xmax=1.5e6,
+                 xtick={0,0.5e6,1e6,1.5e6},
+                 xticklabels={,,,},
+		 scaled x ticks = false,
+                 ymin=9e-6,
+                 ymax=1e3,
+                 ytick={9e-6,1e-3,1e-1,1e1,1e3},
+                 yticklabels={,,,,},
+                 minor ytick={0.0784e-3,0.2116e-3,0.4096e-3,0.6724e-3,0.0784e-1,0.2116e-1,0.4096e-1,0.6724e-1,0.0784e1,0.2116e1,0.4096e1,0.6724e1,0.0784e3,0.2116e3,0.4096e3,0.6724e3},
+   		 yminorgrids=false,
+                 xmajorgrids=true,
+		 ymajorgrids=true,
+                 legend style={fill=white, fill opacity=0, draw opacity=1, text opacity=1,draw=none}, 
+                 legend pos=south west,
+                 legend cell align={left}
+             ]
+             \addplot[ 
+                 color=blue,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_3rand3.txt};
+             \addplot[  
+                 color=blue,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_3sae.txt};
+             \addplot[ 
+                 color=blue,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_3spost.txt};
+             \addplot[ 
+                 color=red,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_3rand3.txt};
+             \addplot[ 
+                 color=red,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_3ae.txt};
+             \addplot[ 
+                 color=red,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_3post.txt};
+             \legend{$m=2$,,,$m=5$,,}
+            
+         \end{semilogyaxis}
+         \node[black] at (6.25,4.75) {\textbf{D}};
+	 \node[black,right] at (6.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$0\cdot 10^{6}$}};
+	 \node[black,left] at (12.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$1.5\cdot 10^{6}$}};
+	 \node[black] at (9.5,0.5) {$n_F$};
+
+	 \node[black,right,rotate=90] at (6.75,0.9) {\noexpand\noexpand\noexpand\footnotesize{$10^{-5}$}};
+	 \node[black,left, rotate=90] at (6.75,5.1) {\noexpand\noexpand\noexpand\footnotesize{$10^{3}$}};
+	 \node[black, rotate=90] at (6.5,3) {$\min(c_4)$};
+         
+         \begin{semilogyaxis}[
+		 at={(1cm,1cm)},
+	       	 width=5cm,
+		 height=4cm,
+	    	 scale only axis=true,
+                 axis lines = left,
+                 xmin=0,
+                 xmax=1.5e6,
+                 xtick={0,0.5e6,1e6,1.5e6},
+                 xticklabels={,,,},
+		 scaled x ticks = false,
+                 ymin=7e-6,
+                 ymax=1e11,
+                 ytick={7e-6,1e-1,1e3,1e7,1e11},
+                 yticklabels={,,,,},
+                 minor ytick={0.0061e-1,0.0448e-1,0.1678e-1,0.4521e-1,0.0061e3,0.0448e3,0.1678e3,0.4521e3,0.0061e7,0.0448e7,0.1678e7,0.4521e7,0.0061e11,0.0448e11,0.1678e11,0.4521e11},
+   		 yminorgrids=false,
+                 xmajorgrids=true,
+		 ymajorgrids=true,
+                 legend style={fill=white, fill opacity=0, draw opacity=1, text opacity=1,draw=none}, 
+                 legend pos=south west,
+                 legend cell align={left}
+             ]
+             \addplot[ 
+                 color=blue,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_4rand3.txt};
+             \addplot[  
+                 color=blue,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_4sae.txt};
+             \addplot[ 
+                 color=blue,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_4spost.txt};
+             \addplot[ 
+                 color=red,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_4rand3.txt};
+             \addplot[ 
+                 color=red,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_4ae.txt};
+             \addplot[ 
+                 color=red,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_4post.txt};
+             \legend{$m=2$,,,$m=5$,,}
+            
+         \end{semilogyaxis}
+         \node[black] at (0.25,4.75) {\textbf{C}};
+	 \node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$0\cdot 10^{6}$}};
+	 \node[black,left] at (6.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$1.5\cdot 10^{6}$}};
+	 \node[black] at (3.5,0.5) {$n_F$};
+
+	 \node[black,right,rotate=90] at (0.75,0.9) {\noexpand\noexpand\noexpand\footnotesize{$10^{-5}$}};
+	 \node[black,left, rotate=90] at (0.75,5.1) {\noexpand\noexpand\noexpand\footnotesize{$10^{11}$}};
+	 \node[black, rotate=90] at (0.5,3) {$\min(c_3)$};
+        
+         \begin{semilogyaxis}[
+		 at={(7cm,6cm)},
+	       	 width=5cm,
+		 height=4cm,
+	    	 scale only axis=true,
+                 axis lines = left,
+                 xmin=0,
+                 xmax=1.5e6,
+                 xtick={0,0.5e6,1e6,1.5e6},
+                 xticklabels={\empty},
+		 scaled x ticks = false,
+                 ymin=1e4,
+                 ymax=1e5,
+                 ytick={1e4,1.778e4,3.162e4,5.623e4,1e5},
+                 yticklabels={\empty},
+                 minor ytick={12936,14645,15905,16922,23003,26043,28284,30092,40906,46312,50297,53512,72743,82355,89443,95160},
+   		 yminorgrids=false,
+                 xmajorgrids=true,
+		 ymajorgrids=true,
+                 legend style={fill=white, fill opacity=0, draw opacity=1, text opacity=1,draw=none}, 
+                 legend pos=north west,
+                 legend cell align={left}
+             ]
+             \addplot[ 
+                 color=red,
+                 solid,thick,
+             ] table[x =n, y=c] 
+             {Figure_2/f_1rand3.txt};
+             \addplot[ 
+                 color=red,
+                 dashed,
+             ] table[x =n, y=c] 
+             {Figure_2/f_1ae.txt};
+             \addplot[ 
+                 color=red,
+                 dotted,
+             ] table[x=n, y=c] 
+             {Figure_2/f_1post.txt};
+             \legend{$m=5$,,}
+            
+         \end{semilogyaxis}
+         \node[black] at (6.25,9.75) {\textbf{B}};
+	 \node[black,right] at (6.9,5.75) {\noexpand\noexpand\noexpand\footnotesize{$0\cdot 10^{6}$}};
+	 \node[black,left] at (12.1,5.75) {\noexpand\noexpand\noexpand\footnotesize{$1.5\cdot 10^{6}$}};
+	 \node[black] at (9.5,5.5) {$n_F$};
+
+	 \node[black,right,rotate=90] at (6.75,5.9) {\noexpand\noexpand\noexpand\footnotesize{$10^{4}$}};
+	 \node[black,left, rotate=90] at (6.75,10.1) {\noexpand\noexpand\noexpand\footnotesize{$10^{5}$}};
+	 \node[black, rotate=90] at (6.5,8) {$\min(c_2)$};
+
+ \end{tikzpicture}
+ \end{document}
