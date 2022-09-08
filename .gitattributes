@@ -1,3 +1,4 @@
 Training_samples_shear.npy filter=lfs diff=lfs merge=lfs -text
 Training_samples_expansion.npy filter=lfs diff=lfs merge=lfs -text
 Training_samples_compression.npy filter=lfs diff=lfs merge=lfs -text
+Test.txt filter=lfs diff=lfs merge=lfs -text
