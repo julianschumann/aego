@@ -1,0 +1,340 @@
+\documentclass[class=scrreprt]{standalone}
+
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{bm}
+\pgfplotsset{compat=newest}
+\pgfplotsset{hide scale/.style={
+/pgfplots/xtick scale label code/.code={},
+/pgfplots/ytick scale label code/.code={}}}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{colorbrewer}
+\usepgfplotslibrary{colorbrewer}
+
+	 
+\pgfplotsset{cycle list/Reds-9}
+\pgfplotsset{cycle list/Blues-9}
+\KOMAoptions{fontsize=9pt}
+
+
+\begin{document}
+
+\begin{tikzpicture}[]
+	
+	\definecolor{color_r1}{RGB}{237, 27, 35} 			% Red
+	\definecolor{color_r2}{RGB}{246,141,146} 			% Red Opacity 0.5	
+	\definecolor{color_r3}{RGB}{175,50,53} 			% Maroon
+	
+	\definecolor{color_b1}{RGB}{45, 47, 146} 			% Blue
+	\definecolor{color_b2}{RGB}{150,151,200}			% Blue Opacity 0.5
+
+\begin{scope}[xshift = 0cm, yshift = 0cm]
+	\begin{semilogyaxis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=0,
+			xmax=500,
+			xtick={0, 100,200,300,400,500},
+			xticklabels={,,,,,},
+			scaled x ticks = false,
+			ymin=0.00001,
+			ymax=0.1,
+			ytick={0.00001, 0.001, 0.1},
+			yticklabels={,,,},
+			minor ytick = 	{
+						0.0784e-3 ,0.2116e-3, 0.4096e-3, 0.6724e-3,
+						0.0784e-1, 0.2116e-1, 0.4096e-1, 0.6724e-1},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		]
+	             
+		\addplot[color = color_r1, solid, thick] 
+		table[x =m, y=L]  {Fracture anisotropy maximization/Results_compression/f_PCA_loss_compression.txt};
+		
+		\addplot[color = color_r2, dashed, thick] 
+		table[x =m, y=Lr]  {Fracture anisotropy maximization/Results_compression/f_PCA_loss_compression.txt};
+		
+		\addplot[color = color_r3, solid, thick] 
+		table[x =m, y=L]  {Fracture anisotropy maximization/Results_compression/f_AE_loss_compression.txt};
+	
+	\end{semilogyaxis}
+	         
+	\begin{axis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis y line = right,
+			axis x line = none,
+			hide scale,
+			xmin=0,
+			xmax=500,
+			xtick={},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0,
+			ymax=1,
+			ytick={0, 0.5, 1},
+			yticklabels={,,},
+			yminorgrids=false,
+			xmajorgrids=false,
+			ymajorgrids=false
+		]
+		
+		\addplot[color = color_b1, solid, thick] 
+		table[x =m, y=V]  {Fracture anisotropy maximization/Results_compression/f_PCA_var_compression.txt};
+		
+		\addplot[color = color_b2, dashed, thick] 
+		table[x =m, y=Vr]  {Fracture anisotropy maximization/Results_compression/f_PCA_var_compression.txt};
+		   
+	\end{axis}
+	         
+	\node[black] at (0.25,4.75) {\textbf{A}};
+	\node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$0$}};
+	\node[black,left] at (5.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$500$}};
+	\node[black] at (3,0.5) {$m$};
+	
+	\node[black,right,rotate=90] at (0.75,0.9) {\noexpand\noexpand\noexpand\footnotesize{$10^{-5}$}};
+	\node[black,left, rotate=90] at (0.75,5.1) {\noexpand\noexpand\noexpand\footnotesize{$10^{-1}$}};
+	\node[black, rotate=90] at (0.4,3) {\textcolor{red}{Reconstruction Loss}};
+
+\end{scope}
+
+
+
+\begin{scope}[xshift =4.5cm, yshift = 0cm]
+	\begin{semilogyaxis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=0,
+			xmax=500,
+			xtick={0, 100,200,300,400,500},
+			xticklabels={,,,,,},
+			scaled x ticks = false,
+			ymin=0.00001,
+			ymax=0.1,
+			ytick={0.00001, 0.001, 0.1},
+			yticklabels={,,,},
+			minor ytick = 	{
+						0.0784e-3 ,0.2116e-3, 0.4096e-3, 0.6724e-3,
+						0.0784e-1, 0.2116e-1, 0.4096e-1, 0.6724e-1},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		]
+	             
+		\addplot[color = color_r1, solid, thick] 
+		table[x =m, y=L]  {Fracture anisotropy maximization/Results_expansion/f_PCA_loss_expansion.txt};
+		
+		\addplot[color = color_r2, dashed, thick] 
+		table[x =m, y=Lr]  {Fracture anisotropy maximization/Results_expansion/f_PCA_loss_expansion.txt};
+		
+		\addplot[color = color_r3, solid, thick] 
+		table[x =m, y=L]  {Fracture anisotropy maximization/Results_expansion/f_AE_loss_expansion.txt};
+	
+	\end{semilogyaxis}
+	         
+	\begin{axis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis y line = right,
+			axis x line = none,
+			hide scale,
+			xmin=0,
+			xmax=500,
+			xtick={},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0,
+			ymax=1,
+			ytick={0, 0.5, 1},
+			yticklabels={,,},
+			yminorgrids=false,
+			xmajorgrids=false,
+			ymajorgrids=false
+		]
+		
+		\addplot[color = color_b1, solid, thick] 
+		table[x =m, y=V]  {Fracture anisotropy maximization/Results_expansion/f_PCA_var_expansion.txt};
+		
+		\addplot[color = color_b2, dashed, thick] 
+		table[x =m, y=Vr]  {Fracture anisotropy maximization/Results_expansion/f_PCA_var_expansion.txt};
+		   
+	\end{axis}
+	         
+	\node[black] at (0.75,4.75) {\textbf{B}};
+	\node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$0$}};
+	\node[black,left] at (5.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$500$}};
+	\node[black] at (3,0.5) {$m$};
+
+\end{scope}
+
+
+
+
+
+
+
+\begin{scope}[xshift = 9cm, yshift = 0cm]
+	\begin{semilogyaxis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=0,
+			xmax=500,
+			xtick={0, 100,200,300,400,500},
+			xticklabels={,,,,,},
+			scaled x ticks = false,
+			ymin=0.00001,
+			ymax=0.1,
+			ytick={0.00001, 0.001, 0.1},
+			yticklabels={,,,},
+			minor ytick = 	{
+						0.0784e-3 ,0.2116e-3, 0.4096e-3, 0.6724e-3,
+						0.0784e-1, 0.2116e-1, 0.4096e-1, 0.6724e-1},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		]
+	             
+		\addplot[color = color_r1, solid, thick] 
+		table[x =m, y=L]  {Fracture anisotropy maximization/Results_shear/f_PCA_loss_shear.txt};
+		
+		\addplot[color = color_r2, dashed, thick] 
+		table[x =m, y=Lr]  {Fracture anisotropy maximization/Results_shear/f_PCA_loss_shear.txt};
+		
+		\addplot[color = color_r3, solid, thick] 
+		table[x =m, y=L]  {Fracture anisotropy maximization/Results_shear/f_AE_loss_shear.txt};
+	
+	\end{semilogyaxis}
+	         
+	\begin{axis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis y line = right,
+			axis x line = none,
+			hide scale,
+			xmin=0,
+			xmax=500,
+			xtick={},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0,
+			ymax=1,
+			ytick={0, 0.5, 1},
+			yticklabels={,,},
+			yminorgrids=false,
+			xmajorgrids=false,
+			ymajorgrids=false
+		]
+		
+		\addplot[color = color_b1, solid, thick] 
+		table[x =m, y=V]  {Fracture anisotropy maximization/Results_shear/f_PCA_var_shear.txt};
+		
+		\addplot[color = color_b2, dashed, thick] 
+		table[x =m, y=Vr]  {Fracture anisotropy maximization/Results_shear/f_PCA_var_shear.txt};
+		   
+	\end{axis}
+	         
+	\node[black] at (0.75,4.75) {\textbf{C}};
+	\node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$0$}};
+	\node[black,left] at (5.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$500$}};
+	\node[black] at (3,0.5) {$m$};
+	 
+	\node[black,left,rotate= - 90] at (5.25,0.9) {\noexpand\noexpand\noexpand\footnotesize{$0$}};
+	\node[black,right, rotate= - 90] at (5.25,5.1) {\noexpand\noexpand\noexpand\footnotesize{$1$}};
+	\node[black, rotate= - 90] at (5.6,3) {\textcolor{blue!60!black}{Explained variance}};
+
+\end{scope}
+
+
+\filldraw[draw=black,fill=black!20!white] (1,-0.75) rectangle (14,0);
+        \begin{axis}[
+            at = {(1cm,-0.75cm)},
+            axis lines = left,
+            axis line style={draw=none},
+            width=13cm,
+            height=0.75cm,
+	    scale only axis=true,
+            enlargelimits=false,
+            xlabel = ,
+            ylabel = ,
+            xmajorgrids=true,
+	    ymajorgrids=true,
+    	    legend columns = 3,
+            legend style={fill=none, 
+            			 cells = {align = left}, 
+            			 draw=none, 
+            			 at={(0,0.5)}, 
+            			 anchor=west, 
+            			 style={column sep=0.25cm, row sep = - 0.235cm}},
+            legend cell align=center,
+            xmin=0,
+            xmax=0.1,
+            xtick={\empty},
+            ymin=0,
+            ymax=0.1,
+            ytick={\empty},
+        ]
+        
+         \addplot[ 
+                 color = color_r1,
+                 solid,thick,
+             ] coordinates {(1,1) (2,1)};
+
+             \addplot[ 
+                 color = color_r2,
+                 solid,thick,dashed,
+             ] coordinates {(1,1) (2,1)};
+             
+             \addplot[ 
+                 color = color_r3,
+                 solid,thick,
+             ] coordinates {(1,1) (2,1)};
+             
+             \addlegendimage{empty legend};
+             \addlegendimage{empty legend};
+             \addlegendimage{empty legend};
+             
+             
+             \addplot[ 
+                 color = color_b1,
+                 solid,thick,
+             ] coordinates {(1,1) (2,1)};
+             
+             \addplot[ 
+                 color = color_b2,
+                 solid,thick,dashed,
+             ] coordinates {(1,1) (2,1)};
+
+             \addlegendimage{empty legend};
+
+        
+        
+        
+        \legend{\;,\;,\; ,
+        {$\bm{X}_{250}$ (PCA) \textcolor{black!20!white}{000000000}}, 
+        {$\bm{X}_{0}$ (PCA) \textcolor{black!20!white}{0000000000}},
+        {$\bm{X}_{250}$ (AE)}, 
+         \;,\;,\;};
+
+        \end{axis}
+
+ \end{tikzpicture}
+ \end{document}

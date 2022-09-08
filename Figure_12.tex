@@ -1,0 +1,64 @@
+\documentclass[class=scrreprt]{standalone}
+
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{mathtools}
+\DeclareMathOperator*{\LO}{LO}
+
+\KOMAoptions{fontsize=9pt}
+
+\begin{document}
+        \begin{tikzpicture}
+        \begin{semilogyaxis}[
+            at = {(1cm,1cm)},
+            width=4.5cm,
+            height=4.5cm,
+	    	 scale only axis=true,
+                 axis lines = left,
+            enlargelimits=false,
+            xlabel = ,
+            ylabel = ,
+            xmin=0,
+            xmax=8,
+            xtick={0,1,2,3,4,5,6,7,8},
+                 xticklabels={\empty},
+		 scaled x ticks = false,
+            ymin=1e-5,
+            ymax=1e-2,
+            ytick={1e-5,1e-4,1e-3,1e-2},
+                 yticklabels={\empty},
+                 minor ytick={2.8e-5,4.6e-5,6.4e-5,8.2e-5,   2.8e-4,4.6e-4,6.4e-4,8.2e-4,     2.8e-3,4.6e-3,6.4e-3,8.2e-3},
+                 yminorgrids=false,
+                 xmajorgrids=true,
+		 ymajorgrids=true,
+                 legend style={fill=white, fill opacity=0, draw opacity=1, text opacity=1,draw=none}, 
+                 legend pos=north west,
+                 legend cell align={left}
+            ]
+    
+        
+  
+        \addplot+[
+            only marks,
+            mark=x,
+            black,
+            mark options={fill=black, fill opacity=0.8,solid},
+            mark size=3 pt, thick]
+        table[x=m, y=e]
+        {Benchmark functions/C_1/f_1error.txt};
+        
+        \end{semilogyaxis}
+        \node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$0$}};
+	 \node[black,left] at (5.6,.75) {\noexpand\noexpand\noexpand\footnotesize{$8$}};
+	 \node[black] at (3.25,0.5) {$m$};
+
+	 \node[black,right,rotate=90] at (0.75,0.9) {\noexpand\noexpand\noexpand\footnotesize{$10^{-2}$}};
+	 \node[black,left, rotate=90] at (0.75,5.6) {\noexpand\noexpand\noexpand\footnotesize{$10^{-5}$}};
+	 \node[black, rotate=90] at (0.5,3.25) {$\mathcal{L}_{\text{R}}$};
+        
+        \draw[white] (0.1,0.1) rectangle(5.6,5.6);
+       
+        \end{tikzpicture}
+\end{document}
