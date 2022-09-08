@@ -2,7 +2,7 @@
 In this repository, the code and data used to generate the results from the paper "A machine learning approach for fighting the curse of dimensionality in optimization" can be found. This should allow the reconstruction of the results visible in Figures 2, 3, 4, and 6.
 
 # Figure 2
-[Figure 2](https://github.com/julianschumann/ae-opt/blob/main/Figure_2.pdf) shows the results of optimizing the benchmark functions, and can be produced with the code found in the subdirectories of [Benchmark_functions](https://github.com/julianschumann/ae-opt/blob/main/Benchmark_functions). When reproducing the results fro c2, c3 and c4, it should be enough to just run the repsective python files:
+[Figure 2](https://github.com/julianschumann/ae-opt/blob/main/Figure_2.pdf) shows the results of optimizing the benchmark functions, and can be produced with the code found in the subdirectories of [Benchmark_functions](https://github.com/julianschumann/ae-opt/tree/main/Benchmark%20functions). When reproducing the results fro c2, c3 and c4, it should be enough to just run the repsective python files:
 ```
 python benchmark_test_c1.py
 python benchmark_test_c2.py 
