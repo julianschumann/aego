@@ -43,6 +43,4 @@ The result show in the paper have been produced using the following software imp
   - Keras: 2.7.0
   - Mpi4py: 3.1.3
 
-The hybrida module used to run the Fracture anisotropy maximization can be found [here]().
-
 
