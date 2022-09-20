@@ -85,7 +85,8 @@ class Autoencoder():
                 decoded_out = tf.keras.layers.LeakyReLU(alpha = 0.3)(decoded_out)
             else:
                 decoded_out = tf.keras.layers.Conv2DTranspose(shape_out[2], (filter_size, filter_size), strides = stride, 
-                                              activation='tanh', padding='valid', output_padding=(0,0))(decoded_out)
+                                              activation='linear', padding='valid', output_padding=(0,0))(decoded_out)
+                decoded_out = tf.keras.layers.LeakyReLU(alpha = 0.3)(decoded_out)
                 decoded_out = tf.keras.layers.Conv2D(shape_out[2], (shape_out[0] - self.nely + 1, shape_out[1] - self.nelx + 1), 
                                      strides = 1, activation='linear', use_bias=False)(decoded_out)
                 decoded_out = tf.keras.layers.Dense(1, activation='tanh', use_bias=False)(decoded_out)
