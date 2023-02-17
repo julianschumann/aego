@@ -1,5 +1,5 @@
 # Autoencoder enabled global optimization
-In this repository, the code and data used to generate the results from the paper "A machine learning approach for fighting the curse of dimensionality in optimization" can be found. This should allow the reconstruction of the results visible in Figures 2, 4, 5, and 12.
+In this repository, the code and data used to generate the results from the paper "A machine learning approach for fighting the curse of dimensionality in optimization" can be found. This should allow the reconstruction of the results visible in Figures 3, 5, 6, and C6.
 
 # Figure 3
 [Fig. 3](https://github.com/julianschumann/aego/blob/main/Figure_3.pdf) shows the results of optimizing the benchmark functions, and can be produced with the code found in the subdirectories of [Benchmark_functions](https://github.com/julianschumann/aego/tree/main/Benchmark%20functions). When reproducing the results from $c_1$, $c_2$, $c_3$, and $c_4$, it should be enough to go to the respective folder and just run the repsective python files:
