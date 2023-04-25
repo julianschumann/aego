@@ -18,42 +18,49 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 from AEGO import AEGO 
 from cost_function_expansion import TOP_cost_function
+import os
 
 file_name = '_expansion'
 
-
-C = TOP_cost_function(debug = True, elnums = 26, save_para_view = False)
-Optimizer = AEGO(cost_function = C)
-
-data_rand = np.load('Training_samples' + file_name + '.npy', allow_pickle = True)
-[X_rand,X_comp,_, _,_] = data_rand 
-
-print("Max value X_rand: {}".format(np.max(np.abs(X_rand))))
-print("Max value X_comp: {}".format(np.max(np.abs(X_comp))))
-
-X_rand = ((X_rand - Optimizer.x_min_value) / Optimizer.x_interval).reshape(len(X_rand),-1)
-
-X_comp = ((X_comp - Optimizer.x_min_value) / Optimizer.x_interval).reshape(len(X_rand),-1)
-
-Edim = [1,2,5,10,20,35,50,75,100,150,200,300,400,500]
-loss = np.zeros(len(Edim))
-loss_comp = np.zeros(len(Edim))
-
-
-for i,edim in enumerate(Edim):
-    pca = PCA(edim)
-    pca.fit(X_rand)
-    loss[i] = np.mean((X_rand - pca.inverse_transform(pca.transform(X_rand)))**2)
-    if edim == Edim[-1]:
-        Part = np.cumsum(pca.explained_variance_ratio_)
+if (not os.path.isfile('PCA' + file_name + '.npy')) and (not os.path.isfile('PCA_rand' + file_name + '.npy')):
+    C = TOP_cost_function(debug = True, elnums = 26, save_para_view = False)
+    Optimizer = AEGO(cost_function = C)
     
-    pca.fit(X_comp)
-    loss_comp[i] = np.mean((X_comp - pca.inverse_transform(pca.transform(X_comp)))**2)
-    if edim == Edim[-1]:
-        Part_comp = np.cumsum(pca.explained_variance_ratio_)
-
-data = np.array([Edim, loss, Part, 0], object)
-data_comp = np.array([Edim, loss_comp, Part_comp, 0], object)
+    data_rand = np.load('Training_samples' + file_name + '.npy', allow_pickle = True)
+    [X_rand,X_comp,_, _,_] = data_rand 
+    
+    print("Max value X_rand: {}".format(np.max(np.abs(X_rand))))
+    print("Max value X_comp: {}".format(np.max(np.abs(X_comp))))
+    
+    X_rand = ((X_rand - Optimizer.x_min_value) / Optimizer.x_interval).reshape(len(X_rand),-1)
+    
+    X_comp = ((X_comp - Optimizer.x_min_value) / Optimizer.x_interval).reshape(len(X_rand),-1)
+    
+    Edim = [1,2,5,10,20,35,50,75,100,150,200,300,400,500]
+    loss = np.zeros(len(Edim))
+    loss_comp = np.zeros(len(Edim))
+    
+    
+    for i,edim in enumerate(Edim):
+        pca = PCA(edim)
+        pca.fit(X_rand)
+        loss[i] = np.mean((X_rand - pca.inverse_transform(pca.transform(X_rand)))**2)
+        if edim == Edim[-1]:
+            Part = np.cumsum(pca.explained_variance_ratio_)
+        
+        pca.fit(X_comp)
+        loss_comp[i] = np.mean((X_comp - pca.inverse_transform(pca.transform(X_comp)))**2)
+        if edim == Edim[-1]:
+            Part_comp = np.cumsum(pca.explained_variance_ratio_)
+    
+    data = np.array([Edim, loss, Part, 0], object)
+    data_comp = np.array([Edim, loss_comp, Part_comp, 0], object)
+    
+    np.save('PCA' + file_name + '.npy', data)
+    np.save('PCA_rand' + file_name + '.npy', data_comp)
+else:
+    Edim, loss, Part, _ = np.load('PCA' + file_name + '.npy', allow_pickle = True)
+    Edim, loss_comp, Part_comp, _ = np.load('PCA_rand' + file_name + '.npy', allow_pickle = True)
 
 data_ae = np.load('Dimension' + file_name + '.npy', allow_pickle = True)
 Edim_ae, loss_ae = data_ae
@@ -85,10 +92,6 @@ ax2.set_ylim([0,1])
 fig.tight_layout()  # otherwise the right y-label is slightly clipped
 fig.legend(loc='center left', bbox_to_anchor=(0.6, 0.5))
 plt.show()
-
-np.save('PCA' + file_name + '.npy', data)
-np.save('PCA_rand' + file_name + '.npy', data_comp)
-
 
 
 #%% Save results to text for paper figure 

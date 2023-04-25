@@ -33,7 +33,7 @@ def run():
     tf.random.set_seed(0)
     np.random.seed(0)
     
-    Edim = [1, 2, 5, 10, 20, 50, 100]
+    Edim = [1, 5, 10, 50, 100, 500]
     Loss = [np.nan] * len(Edim)
     EL = []
     DL = []
