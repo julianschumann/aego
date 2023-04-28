@@ -32,7 +32,7 @@ Optimizer = AEGO(cost_function = C)
 # Load training data
 data_rand = np.load('Training_samples' + file_name + '.npy', allow_pickle = True)
 [XL, XF, C_rand, _, _] = data_rand 
-CL = C_rand[-1]
+CL = C_rand[100]
 CF = C_rand[0]
 
 #%% Train AE on random samples
@@ -192,23 +192,23 @@ if not os.path.isfile('Prob' + file_name + '.npy'):
     c_max = C.max()
     c_int = c_max - c_min
     
-    c_range = np.linspace(c_min - 0.25 * c_int, c_max + 0.25 * c_int, 501)
-    k = 60
+    c_range = np.linspace(c_min - 0.25 * c_int, c_max + 0.25 * c_int, 2001)
+    k = 100
     for c in C:
         p = pdf(c, k, c_range)
         P.append(p)
     
     P = np.array(P)
     
-    data_prob = [Type, C, P, 0]
+    data_prob = [Type, C, P, c_range,  0]
     np.save('Prob' + file_name + '.npy', data_prob)
 else:
-    [Type, C, P, _] = np.load('Prob' + file_name + '.npy', allow_pickle = True)
+    [Type, C, P, c_range, _] = np.load('Prob' + file_name + '.npy', allow_pickle = True)
 
 
 f=open('probability' + file_name + '.txt','w+')
 f.write('c ' + ' '.join(Type) + '\n')
-for i in range(len(c)):
-    f.write('{:10.3e} {:10.3e} {:10.3e} {:10.3e} {:10.3e} {:10.3e} {:10.3e}\n'.format(c[i], *P[:,i]))
+for i in range(len(c_range)):
+    f.write('{:10.3e} {:10.3e} {:10.3e} {:10.3e} {:10.3e} {:10.3e} {:10.3e}\n'.format(c_range[i] * 1e13, *(P[:,i] / 1e14)))
     
 f.close()

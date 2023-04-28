@@ -1,0 +1,334 @@
+\documentclass[class=scrreprt]{standalone}
+
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{bm}
+\pgfplotsset{compat=newest}
+\pgfplotsset{hide scale/.style={
+/pgfplots/xtick scale label code/.code={},
+/pgfplots/ytick scale label code/.code={}}}
+\usepgfplotslibrary{groupplots,statistics}
+\usetikzlibrary{colorbrewer}
+\usepgfplotslibrary{colorbrewer}
+
+	 
+\pgfplotsset{cycle list/Reds-9}
+\pgfplotsset{cycle list/Blues-9}
+\KOMAoptions{fontsize=9pt}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{scalerel}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{makecell}
+\usepackage{siunitx}
+
+\DeclareMathOperator*{\LO}{LO}
+
+\begin{document}
+
+\begin{tikzpicture}[]
+	
+	\definecolor{color_b1}{RGB}{75,75,75} 			% gray 
+	\definecolor{color_r2}{RGB}{75, 75, 200} 			% Blue
+	\definecolor{color_b2}{RGB}{175,50,53} 			% red
+
+\begin{scope}[xshift = 0cm, yshift = 0cm]
+	\begin{semilogyaxis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=-0.0002,
+			xmax=0.0001,
+			xtick={0},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=1,
+			ymax=100000,
+			ytick={0.001,0.002},
+			yticklabels={},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		]
+	         
+		\addplot[color = color_b1, solid] 
+		table[x =c, y=X_250]  {Fracture anisotropy maximization/Results_compression/probability_compression.txt};
+		\addplot[color = color_r2, solid] 
+		table[x =c, y=AE_100_(X_0)]  {Fracture anisotropy maximization/Results_compression/probability_compression.txt};
+		\addplot[color = color_b2, solid] 
+		table[x =c, y=AE_100_(X_250)]  {Fracture anisotropy maximization/Results_compression/probability_compression.txt};
+	\end{semilogyaxis}
+	
+	\begin{axis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=-0.0002,
+			xmax=0.0001,
+			xtick={0},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0,
+			ymax=12,
+			ytick={-2,-1},
+			yticklabels={},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		] 
+		\addplot+[color = color_b1, boxplot prepared={
+      			median=-3.44e-6,
+      			upper quartile=-8.09e-7,
+      			lower quartile=-6.8e-6,
+	      		upper whisker=2.32e-5,
+	      		lower whisker=-5.94e-5},] coordinates {};
+		\addplot+[color = color_r2, boxplot prepared={
+      			median=-4.78e-6,
+      			upper quartile=-1.9e-6,
+      			lower quartile=-8.17e-6,
+	      		upper whisker=2.08e-5,
+	      		lower whisker=-8.14e-5},] coordinates {};
+		\addplot+[color = color_b2, boxplot prepared={
+      			median=-7.6e-6,
+      			upper quartile=-2.98e-6,
+      			lower quartile=-1.59e-5,
+	      		upper whisker=4.06e-5,
+	      		lower whisker=-1.45e-4},] coordinates {};
+	\end{axis}         
+	
+	\node[black] at (0.75,4.75) {\textbf{D}};
+	\node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$-2 \cdot 10^{-4}$}};
+	\node[black,left] at (5.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$1\cdot 10^{-4}$}};
+	\node[black] at (3,0.5) {$J$};
+	
+	
+	\node[black, rotate=90] at (0.4,3) {$\log p\left(J \circ \LO^{100}\right)$};
+
+\end{scope}
+
+
+
+\begin{scope}[xshift =4.5cm, yshift = 0cm]
+	\begin{semilogyaxis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=-0.0004,
+			xmax=0.0003,
+			xtick={0},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0.1,
+			ymax=100000,
+			ytick={0.001,0.002},
+			yticklabels={},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		]
+		\addplot[color = color_b1, solid] 
+		table[x =c, y=X_250]  {Fracture anisotropy maximization/Results_expansion/probability_expansion.txt};
+		\addplot[color = color_r2, solid] 
+		table[x =c, y=AE_100_(X_0)]  {Fracture anisotropy maximization/Results_expansion/probability_expansion.txt};
+		\addplot[color = color_b2, solid] 
+		table[x =c, y=AE_100_(X_250)]  {Fracture anisotropy maximization/Results_expansion/probability_expansion.txt};
+	
+	\end{semilogyaxis}
+	
+	\begin{axis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=-0.0004,
+			xmax=0.0003,
+			xtick={0},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0,
+			ymax=12,
+			ytick={-2,-1},
+			yticklabels={},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		] 
+		\addplot+[color = color_b1, boxplot prepared={
+      			median=1.31e-5,
+      			upper quartile=4.08e-5,
+      			lower quartile=-1.56e-5,
+	      		upper whisker=2.00e-4,
+	      		lower whisker=-1.86e-4},] coordinates {};
+		\addplot+[color = color_r2, boxplot prepared={
+      			median=5.1e-6,
+      			upper quartile=3.06e-5,
+      			lower quartile=-2.1e-5,
+	      		upper whisker=1.49e-4,
+	      		lower whisker=-1.79e-4},] coordinates {};
+		\addplot+[color = color_b2, boxplot prepared={
+      			median=8.89e-6,
+      			upper quartile=5.23e-5,
+      			lower quartile=-3.79e-5,
+	      		upper whisker=2.54e-4,
+	      		lower whisker=-3.26e-4},] coordinates {};
+	\end{axis}         
+	  
+	         
+	\node[black] at (0.75,4.75) {\textbf{E}};
+	\node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$-4 \cdot 10^{-4}$}};
+	\node[black,left] at (5.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$3 \cdot 10^{-4}$}};
+	\node[black] at (3,0.5) {$J$};
+
+\end{scope}
+
+
+
+
+
+
+
+\begin{scope}[xshift = 9cm, yshift = 0cm]
+	\begin{semilogyaxis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=-2e-4,
+			xmax=2e-4,
+			xtick={0},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0.01,
+			ymax=10000,
+			ytick={0.001,0.002},
+			yticklabels={},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		]
+	             
+		\addplot[color = color_b1, solid] 
+		table[x =c, y=X_250]  {Fracture anisotropy maximization/Results_shear/probability_shear.txt};
+		\addplot[color = color_r2, solid] 
+		table[x =c, y=AE_100_(X_0)]  {Fracture anisotropy maximization/Results_shear/probability_shear.txt};
+		\addplot[color = color_b2, solid] 
+		table[x =c, y=AE_100_(X_250)]  {Fracture anisotropy maximization/Results_shear/probability_shear.txt};
+	
+	\end{semilogyaxis}
+	
+	\begin{axis}[
+			at={(1cm,1cm)},
+			width=4cm,
+			height=4cm,
+			scale only axis=true,
+			axis lines = left,
+			hide scale, 
+			xmin=-0.0002,
+			xmax=0.0002,
+			xtick={0},
+			xticklabels={},
+			scaled x ticks = false,
+			ymin=0,
+			ymax=12,
+			ytick={-2,-1},
+			yticklabels={},
+			yminorgrids=false,
+			xmajorgrids=true,
+			ymajorgrids=true
+		] 
+		\addplot+[color = color_b1, boxplot prepared={
+      			median=-1.9e-8,
+      			upper quartile=4.87e-6,
+      			lower quartile=-5.23e-6,
+	      		upper whisker=6.71e-5,
+	      		lower whisker=-6.29e-5},] coordinates {};
+		\addplot+[color = color_r2, boxplot prepared={
+      			median=1.34e-7,
+      			upper quartile=4.65e-6,
+      			lower quartile=-4.42e-6,
+	      		upper whisker=5.13e-5,
+	      		lower whisker=-6.24e-5},] coordinates {};
+		\addplot+[color = color_b2, boxplot prepared={
+      			median=-5.91e-7,
+      			upper quartile=1.32e-5,
+      			lower quartile=-1.4e-5,
+	      		upper whisker=1.79e-4,
+	      		lower whisker=-1.62e-4},] coordinates {};
+	\end{axis}      
+	
+	\node[white] at (0.75, 5.25) {\textbf{F}};
+	\node[black] at (0.75,4.75) {\textbf{F}};
+	\node[black,right] at (0.9,0.75) {\noexpand\noexpand\noexpand\footnotesize{$-2 \cdot 10^{-16}$}};
+	\node[black,left] at (5.1,0.75) {\noexpand\noexpand\noexpand\footnotesize{$2 \cdot10^{-16}$}};
+	\node[black] at (3,0.5) {$J$};
+	
+	\node[black, rotate= - 90] at (5.6,3) {\textcolor{white}{Explained variance ratio}};
+\end{scope}
+
+
+\filldraw[draw=black,fill=black!20!white] (1,-0.75) rectangle (14,0);
+        \begin{axis}[
+            at = {(1cm,-0.75cm)},
+            axis lines = left,
+            axis line style={draw=none},
+            width=13cm,
+            height=0.75cm,
+	    scale only axis=true,
+            enlargelimits=false,
+            xlabel = ,
+            ylabel = ,
+            xmajorgrids=true,
+	    ymajorgrids=true,
+    	    legend columns = 3,
+            legend style={fill=none, 
+            			 cells = {align = left}, 
+            			 draw=none, 
+            			 at={(0.5,0.5)}, 
+            			 anchor = center,
+            			 style={column sep=0.25cm, row sep = - 0.235cm}},
+            legend cell align=center,
+            xmin=0,
+            xmax=0.1,
+            xtick={\empty},
+            ymin=0,
+            ymax=0.1,
+            ytick={\empty},
+        ]
+             \addplot[ 
+                 color = color_b1,
+                 solid, thick
+             ] coordinates {(1,1) (2,1)};
+             
+             \addplot[ 
+                 color = color_r2,
+                 solid,thick,
+             ] coordinates {(1,1) (2,1)};
+             
+             \addplot[ 
+                 color = color_b2,
+                 solid,thick,
+             ] coordinates {(1,1) (2,1)};
+
+        \legend{{$X$},
+                    {$X_{Z, \bm{X}_{0}}$},
+                    {$X_{Z, \bm{X}_{250}}$}};
+
+        \end{axis}
+
+ \end{tikzpicture}
+ \end{document}
