@@ -57,6 +57,7 @@ coverage.xml
 
 # Results
 *.vtu
+*.zip
 
 # Django stuff:
 *.log

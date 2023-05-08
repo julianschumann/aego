@@ -105,16 +105,6 @@ fcomp.close()
 #%% Save pictures
 C.prepare_LO(num_samples = 1, ml = 0.001, firstreinitialize = False, vectorize = True)
 
-I_rand = np.where(C_rand == np.min(C_rand[(G_rand[:,:,:2] < 0).all(-1)]))
-
-X_rand_best, C_rand_best, _ = C.LO(X_rand_init[I_rand[1]], I_rand[0][0])
-
-C.create_picture(X_rand_best, 'Design_rand' + file_name)
-
-
-
-C.prepare_LO(num_samples = 1, ml = 0.001, firstreinitialize = False, vectorize = True)
-
 I_post = np.where(C_post == np.min(C_post[(G_post[:,:,:2] < 0).all(-1)]))
 
 C.save_para_view = True
@@ -122,3 +112,12 @@ X_post_best, C_post_best, _ = C.LO(X_de[I_post[1]], I_post[0][0])
 
 C.create_picture(X_post_best, 'Design_post' + file_name)
 
+
+C.prepare_LO(num_samples = 1, ml = 0.001, firstreinitialize = False, vectorize = True)
+
+I_rand = np.where(C_rand == np.min(C_rand[(G_rand[:,:,:2] < 0).all(-1)]))
+
+C.save_para_view = False
+X_rand_best, C_rand_best, _ = C.LO(X_rand_init[I_rand[1]], I_rand[0][0])
+
+C.create_picture(X_rand_best, 'Design_rand' + file_name)
