@@ -8,11 +8,11 @@ except AttributeError:
     builtins.profile = profile
 
 import numpy as np
-from cost_function_expansion import TOP_cost_function
+from cost_function_shear import TOP_cost_function
 import matplotlib.pyplot as plt
 
 #%% Load training data
-file_name = '_expansion'
+file_name = '_shear'
 
 C = TOP_cost_function(debug = True, elnums = 26, save_para_view = False, para_view_char = 0)
 # Generate training sampels
@@ -117,6 +117,7 @@ C.prepare_LO(num_samples = 1, ml = 0.001, firstreinitialize = False, vectorize =
 
 I_post = np.where(C_post == np.min(C_post[(G_post[:,:,:2] < 0).all(-1)]))
 
+C.save_para_view = True
 X_post_best, C_post_best, _ = C.LO(X_de[I_post[1]], I_post[0][0])
 
 C.create_picture(X_post_best, 'Design_post' + file_name)

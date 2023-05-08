@@ -117,6 +117,7 @@ C.prepare_LO(num_samples = 1, ml = 0.001, firstreinitialize = False, vectorize =
 
 I_post = np.where(C_post == np.min(C_post[(G_post[:,:,:2] < 0).all(-1)]))
 
+C.save_para_view = True
 X_post_best, C_post_best, _ = C.LO(X_de[I_post[1]], I_post[0][0])
 
 C.create_picture(X_post_best, 'Design_post' + file_name)
