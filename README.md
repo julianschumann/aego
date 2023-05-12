@@ -21,7 +21,7 @@ python Generate_training_samples.py (150 processors)
 python Generate_decoder_dimension.py 
 python PCA_test.py
 python Generate_decoder.py
-python Run_optimization.py (150 processors)
+python Run_optimization.py (100 processors)
 python Comparison.py (150 processors)
 python Analysis.py
 ```
